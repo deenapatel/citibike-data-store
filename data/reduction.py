@@ -8,4 +8,7 @@ import pandas as pd
 filename = sys.argv[1]
 df=pd.read_csv(filename)
 df['minute']=df.time.apply(lambda x: x[14:16]).astype(int).apply(lambda x: x%10)
-df[df.minute==0].to_csv(filename[:-4]+'reduced.csv')
+dfnew=df[df.minute==0]
+dfbase=dfnew[['time','id','availableBikes','availableDocks','totalDocks','statusKey','statusValue','testStation','latitude','longitude','stationName']]
+dfbase.to_csv(filename[:-4]+'reduced.csv',index=False)
+
