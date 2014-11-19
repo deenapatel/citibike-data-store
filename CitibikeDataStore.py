@@ -1,4 +1,5 @@
-import urllib, json, time, os.path
+import urllib, time, os.path
+import simplejson as json
 import pandas as pd
 from pandas.io.json import json_normalize
 
