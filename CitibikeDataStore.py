@@ -27,10 +27,15 @@ while True:
         print 'ERROR:',e,' at time:',updateTime
     except:
         print 'other ERROR at time:',updateTime
-    df=json_normalize(data['stationBeanList'])
-    updateTime = data['executionTime']
-    df['time']=updateTime
-    if updateTime != prevTime: #only want to update if the time has changed
-        prevTime=updateTime
-     	df.to_csv('data/citibike_data.csv',header=False, mode='a')
-    time.sleep(60)
+    try:    
+	df=json_normalize(data['stationBeanList'])
+    	updateTime = data['executionTime']
+    	df['time']=updateTime
+    	if updateTime != prevTime: #only want to update if the time has changed
+            prevTime=updateTime
+     	    df.to_csv('data/citibike_data.csv',header=False, mode='a')
+   	time.sleep(60)
+    except (IOError,ValueError) as e:
+        print 'ERROR:',e,' at time:',updateTime
+    except:
+        print 'other ERROR at time:',updateTime
